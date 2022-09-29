@@ -18,10 +18,14 @@ OLLO_PORT=32
 echo "export OLLO_PORT=${OLLO_PORT}" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
-echo -e "\e[1m\e[32m1. Sunucu guncellemesi yapiliyor.. \e[0m" && sleep 1
+echo -e "\e[1m\e[32m1. Sunucu guncellemesi yapiliyor.. \e[0m"
+echo -e "======================================================"
+sleep 1
 sudo apt update && sudo apt upgrade -y
 
-echo -e "\e[1m\e[32m2. Gerekli kurulumlar yapiliyor.. \e[0m" && sleep 1
+echo -e "\e[1m\e[32m2. Gerekli kurulumlar yapiliyor.. \e[0m"
+echo -e "======================================================"
+sleep 1
 sudo apt install curl build-essential git wget jq make gcc tmux chrony -y
 
 if ! [ -x "$(command -v go)" ]; then
@@ -35,7 +39,9 @@ if ! [ -x "$(command -v go)" ]; then
   source $HOME/.bash_profile
 fi
 
-echo -e "\e[1m\e[32m3. Binary dosyalari yukleniyor.. \e[0m" && sleep 1
+echo -e "\e[1m\e[32m3. Binary dosyalari yukleniyor.. \e[0m"
+echo -e "======================================================"
+sleep 1
 cd $HOME
 git clone https://github.com/OllO-Station/ollo.git
 cd ollo
@@ -58,7 +64,10 @@ sed -i.bak -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:${O
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0utollo\"/" $HOME/.ollo/config/app.toml
 
 
-echo -e "\e[1m\e[32m4. Servis dosyasi olusturuluyor.. \e[0m" && sleep 1
+echo -e "\e[1m\e[32m4. Servis dosyasi olusturuluyor.. \e[0m"
+echo -e "======================================================"
+
+sleep 1
 
 
 sudo tee /etc/systemd/system/ollod.service > /dev/null <<EOF
