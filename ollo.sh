@@ -90,5 +90,24 @@ sudo systemctl enable ollod
 sudo systemctl restart ollod
 
 echo "=============== NODE'UNUZ KURULDU ==================="
-echo -e 'Node loglarini kontrol etmek icin: \e[1m\e[32mjournalctl -u ollod -f -o cat\e[0m'
-echo -e "Senkronize durumunu kontrol etmek icin: \e[1m\e[32mollod status 2>&1 | jq .SyncInfo\e[0m"
+
+echo -e "\e[1m\e[32m4. StateSync yapiliyor.. \e[0m"
+echo "======================================================"
+
+SNAP_RPC=213.239.217.52:35657
+peers="3f54183cf5a712678dc4dff57fa49a5522918727@38.242.130.16:32657,1be12d239ca70a906264de0f09e0ffa01c4211ba@138.201.136.49:26656,06658ccd5c119578fb662633234a2ef154881b94@18.144.61.148:26656,a77c2afc500569a453b7fb64c8a804878dc6e7be@65.108.127.215:26856,2eeb90b696ba9a62a8ad9561f39c1b75473515eb@77.37.176.99:26656,eaee85418b4fc3e7e2e298bb8deb5a8f49956859@5.9.13.234:26856,6e8c603e5eeefd4b83d0575951209c3b495848d6@65.108.69.68:26858,45acf9ea2f2d6a2a4b564ae53ea3004f902d3fb7@185.182.184.200:26656,62b5364abdfb7c0934afaddbd0704acf82127383@65.108.13.185:27060,f599dcd0a09d376f958910982d82351a6f8c178b@95.217.118.96:26878,e2b22ed4b00f37adafed6d711432f612821f5943@77.52.182.194:26656,d38fcf79871189c2c430473a7e04bd69aeb812c2@78.107.234.44:16656,0b4474bc96d72586e1be1860db731522d05fdeef@181.41.142.78:11523,1173fe561814f1ecb8b8f19d1769b87cd576897f@185.173.157.251:26656,489daf96446f104d822fae34cd4aa7a9b5cebf65@65.21.131.215:26626,8559490d439f774e39818c3a8f05a750c6ae6ff8@95.216.151.32:32657,ef56914e54fde621ca71d171c0711166d281b1bc@65.21.149.47:32657,969f3672d9d302c374102aa8ddb1c79672333127@95.216.149.119:32657"
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.ollo/config/config.toml
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
+
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
+s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.ollo/config/config.toml
+ollod tendermint unsafe-reset-all --home $HOME/.ollo --keep-addr-book
+systemctl restart ollod && journalctl -u ollod -f -o cat
+
