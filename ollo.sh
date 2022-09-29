@@ -19,12 +19,12 @@ echo "export OLLO_PORT=${OLLO_PORT}" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 echo -e "\e[1m\e[32m1. Sunucu guncellemesi yapiliyor.. \e[0m"
-echo -e "======================================================"
+echo "======================================================"
 sleep 1
 sudo apt update && sudo apt upgrade -y
 
 echo -e "\e[1m\e[32m2. Gerekli kurulumlar yapiliyor.. \e[0m"
-echo -e "======================================================"
+echo "======================================================"
 sleep 1
 sudo apt install curl build-essential git wget jq make gcc tmux chrony -y
 
@@ -40,7 +40,7 @@ if ! [ -x "$(command -v go)" ]; then
 fi
 
 echo -e "\e[1m\e[32m3. Binary dosyalari yukleniyor.. \e[0m"
-echo -e "======================================================"
+echo "======================================================"
 sleep 1
 cd $HOME
 git clone https://github.com/OllO-Station/ollo.git
@@ -65,7 +65,7 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0utollo\"/" $HOME/.
 
 
 echo -e "\e[1m\e[32m4. Servis dosyasi olusturuluyor.. \e[0m"
-echo -e "======================================================"
+echo "======================================================"
 
 sleep 1
 
