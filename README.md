@@ -19,7 +19,7 @@ NODE TİPİ | CPU     | RAM      | SSD     |
 - [Twitter](https://twitter.com/OLLOStation)
 - [Discord](https://discord.gg/eVsKcYANPU)
 
-# 1) Script ile kurulum.
+# 1a) Script ile kurulum.
 
 ```
 wget -O ollo.sh https://raw.githubusercontent.com/thisislexar/Ollo-Odullu-Testnet/main/ollo.sh && chmod +x ollo.sh && ./ollo.sh
@@ -28,9 +28,12 @@ wget -O ollo.sh https://raw.githubusercontent.com/thisislexar/Ollo-Odullu-Testne
 
 
 
-# 2) Manuel kurulum.
+# 1b) Manuel kurulum.
 
 Node bilginizi geliştirmek adına dilerseniz [Manuel Kurulum](https://github.com/thisislexar/Ollo-Odullu-Testnet/blob/main/ollo_manual.md) da yapabilirsiniz.
+
+
+# 2) Devam edelim. 
 
 ## Sync durumunu kontrol etmek için:
 
