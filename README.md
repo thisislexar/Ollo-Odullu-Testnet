@@ -1,6 +1,6 @@
 <h1 align="center">Ödüllü Ollo Testneti Kurulum Rehberi
 
-## Merhabalar, bugün Ollo Station testnetine katılıyor olacağız. Sağ üstten yıldızlayıp forklamayı unutmayalım.
+## Merhabalar, bugün Ollo Station testnetine katılıyor olacağız. Sağ üstten yıldızlayıp forklamayı unutmayalım. Sorularınız olursa: [LossNode Chat](https://t.me/LossNode)
 
 ![image](https://user-images.githubusercontent.com/101462877/192958500-67eec3e2-ba83-48c6-ba21-182c037c11ad.png)
 
