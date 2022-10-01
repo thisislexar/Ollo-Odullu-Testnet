@@ -1,4 +1,4 @@
-<h1 align="center">Ödüllü Ödüllü Ollo Testneti Kurulum Rehberi
+<h1 align="center">Ödüllü Ollo Testneti Kurulum Rehberi
 
 ## Merhabalar, bugün Ollo Station testnetine katılıyor olacağız. Sağ üstten yıldızlayıp forklamayı unutmayalım.
 
